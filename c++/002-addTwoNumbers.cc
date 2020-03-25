@@ -52,6 +52,6 @@ public:
 			l1 = l1 ? l1->next : l1;
 			l2 = l2 ? l2->next : l2;
 		}
-		return preHead.next
+		return preHead.next;
 	}
 }
