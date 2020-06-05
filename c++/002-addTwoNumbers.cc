@@ -1,57 +1,74 @@
+#include <iostream>
+
+using namespace std;
+
 
 struct ListNode{
-	int val;
-	ListNode *next;
-	ListNode(int x): val(x), next(NULL) {}
-}
+    int val;
+    ListNode *next;
+    ListNode(int x): val(x), next(NULL) {} // constructor
+};
 
-//----------------------------------------My Ugly-for-now solution
 
 class Solution{
-public:
-	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2){
-		ListNode * ans = new ListNode(0);
-		int carry = 0;
-		ListNode * curr_node = ans;
-		while(l1 != NULL && l2 != NULL){
-			curr = (l1->val + l2->val + carry) % 10;
-			carry = (l1->val + l2->val + carry) / 10;
-			if (curr_node == NULL)
-				curr_node = new ListNode(curr);
-			else 
-				curr_node->val = curr;	
+    public:
+        ListNode *addTwoNumber(ListNode *l1, ListNode *l2) {
+            ListNode preHead(0);
+            ListNode *p = &preHead;
+            int extra = 0;
+            while(l1 || l2 || extra) {
+                int sum = (l1 ? l1->val: 0) + (l2 ? l2->val: 0) + extra;
+                extra = sum / 10;
+                p->next = new ListNode(sum % 10);
+                p = p->next;
+                l1 = l1 ? l1->next : l1;
+                l2 = l2 ? l2->next : l2;
 
-			curr_node = curr_node->next;
-		}
-		if (l1 == NULL){
-			l2->val = l2->val + carry;
-			curr_node = l2;
-		}
-		else if (l2 == NULL){
-			l1->val = l1->val + carry;
-			curr_node = l1;
-		}
-		return ans;
-	}
+            }
+            return preHead.next;
+        }
+};
+
+
+
+//Helper function
+//free_list: free heap-allocated memory when constructing LinkedList
+//           and also print the value of the Node
+void free_list(ListNode ** head) {
+    ListNode * current = *head;
+    ListNode * next;
+    
+    while(current) {
+        cout << current->val;
+        next = current->next;
+        if(next) cout << " << " ;
+        free(current);
+        current = next;
+    }
+    cout << endl;
+}
+
+int main() {
+    Solution b;
+    ListNode * head_1 = new ListNode(3);
+    head_1->next = new ListNode(3);
+    ListNode * head_2 = new ListNode(8);
+    head_2->next = new ListNode(8); // 33 + 88 = 121
+    
+    ListNode * result = b.addTwoNumber(head_1, head_2);
+    
+    cout << "Node 1: " ;
+    free_list(&head_1);
+    cout << "Node 2: " ;
+    free_list(&head_2);
+    cout << "Result: " ;
+    free_list(&result);
+
+    /* Output
+       Node 1: 3 << 3
+       Node 2: 8 << 8
+       Result: 1 << 2 << 1
+    */
 }
 
 
-//---------------------------------------runtime no delay
-
-class Solution{
-public:
-	ListNode *addTwoNumbers(ListNode *l1, ListNode *l2){
-		ListNode preHead(0);
-		ListNode *p = &preHead;
-		int extra = 0;
-		while (l1 || l2 || extra){
-			int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + extra;
-			extra = sum / 10;
-			p->next = new ListNode(sum % 10);
-			p = p->next;
-			l1 = l1 ? l1->next : l1;
-			l2 = l2 ? l2->next : l2;
-		}
-		return preHead.next;
-	}
-}
