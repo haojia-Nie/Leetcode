@@ -6,6 +6,7 @@
  1. ListNode always keep track of the pre/cur/next
  2. ListNode->next != NULL, SegFault issue
  3. carry value + value of curr node
+ 4. Free the Linked List
  */
 
 

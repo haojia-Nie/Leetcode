@@ -41,7 +41,7 @@ void free_list(ListNode ** head) {
     while(current) {
         cout << current->val;
         next = current->next;
-        if(next) cout << " << " ;
+        if(next) cout << " >> " ;
         free(current);
         current = next;
     }
@@ -52,8 +52,8 @@ int main() {
     Solution b;
     ListNode * head_1 = new ListNode(3);
     head_1->next = new ListNode(3);
-    ListNode * head_2 = new ListNode(8);
-    head_2->next = new ListNode(8); // 33 + 88 = 121
+    ListNode * head_2 = new ListNode(7);
+    head_2->next = new ListNode(8); // 33 + 87 = 120
     
     ListNode * result = b.addTwoNumber(head_1, head_2);
     
@@ -65,10 +65,8 @@ int main() {
     free_list(&result);
 
     /* Output
-       Node 1: 3 << 3
-       Node 2: 8 << 8
-       Result: 1 << 2 << 1
+       Node 1: 3 >> 3
+       Node 2: 7 >> 8
+       Result: 0 >> 2 >> 1
     */
 }
-
-
