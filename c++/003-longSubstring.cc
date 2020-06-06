@@ -1,3 +1,9 @@
+//
+//  003-longSubstring.cc
+//
+//
+//  Created by Haojia Nie on 2020-06-05.
+//
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -29,7 +35,7 @@ class Solution {
 		// O(n)
         int LongestSubstring_optimize(string s) {
 			int len = s.length();
-			int max_len = 1;
+			int max_len = 0;
 			unordered_map<string, int> map;
 			int cur_len = 0;
 			for (int i = 0; i < len; i++) {
