@@ -5,7 +5,8 @@ using namespace std;
 
 class Solution {
 	public:
-		//Solution 1 --- Brutal Force(embedded for loop) 
+		//Solution 1 --- Brutal Force(embedded for loop)
+        // O(n^2)
 		int LongestSubstring_basic(string s) {
 			int len = s.length();
 			int max_len;
@@ -25,7 +26,8 @@ class Solution {
 	
 		// Solution 2 -- kind of like Sliding window
 		//   	     -- keep track of the index of the char as well
-		int LongestSubstring_optimize(string s) {
+		// O(n)
+        int LongestSubstring_optimize(string s) {
 			int len = s.length();
 			int max_len = 1;
 			unordered_map<string, int> map;
