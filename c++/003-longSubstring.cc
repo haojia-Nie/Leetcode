@@ -54,6 +54,6 @@ int main() {
 	string t2 = "ababcded";
 	int t1_result = b.LongestSubstring_optimize(t1);
 	int t2_result = b.LongestSubstring_optimize(t2);
-	cout << t1 << " : " << t1_result << endl;
-	cout << t2 << " : " << t2_result << endl;
+	cout << t1 << " : " << t1_result << endl; // output: string: 6
+	cout << t2 << " : " << t2_result << endl; // output: ababcded: 5
 }
