@@ -51,6 +51,40 @@ class Solution {
 			}
 			return max_len;
 		}
+
+	// Solution 3;
+	// use hash Table to keep track of the index, and if the char is already in hash table, then it's a duplicate
+	int lengthOfLongestSubstring(string s) {
+		// create hash table
+		int len = s.length();
+		int result = 0;
+		map <char, int> hashTable;
+		int cur_result = 0;
+		int start_index = 0;
+		 
+		for (int i = 0; i < len; i ++){     
+		    char at = s[i];
+		    int orig_index = hashTable[at];
+		    if (orig_index == 0){
+			hashTable[at] = i + 1;
+			cur_result ++;
+		    }
+		    else if (orig_index != 0){  
+			if ((orig_index - 1) < start_index){
+			    cur_result ++;
+			    hashTable[at] = i + 1;
+			}
+			else {
+			    cur_result = (i + 1) - orig_index;
+			    start_index = orig_index;
+			}
+			hashTable[at] = i + 1;
+		    }
+		    result = (cur_result > result) ? cur_result : result;      
+		}
+		return result;
+		      
+	    }
 };
 
 
