@@ -27,20 +27,16 @@ public:
         while (left < right){
             int left_val = height.at(left);
             int right_val = height.at(right);
+            int height = (left_val >= right_val) ? right_val : left_val;
             int width = right - left;
-            int area = 0;
-            if (left_val < right_val){
-                area = left_val * width;
-                left ++;          
-            } 
-            else if (right_val < left_val){
-                area = right_val * width;
+            int area = height * width;
+            
+            if (right_val < left_val){
                 right --;
             }
             
             else {
                 left ++;
-                area = right_val * width;
             }
 
             maxArea = (maxArea > area) ? maxArea : area;
